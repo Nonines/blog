@@ -13,6 +13,13 @@ class Article extends Model
     use HasFactory;
     protected $fillable = ["title", "excerpt", "image", "caption", "content", "category_id"];
 
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters["search"] ?? false) {
+            $query->where("title", "like", "%" . request("search") . "%")
+                ->orWhere("excerpt", "like", "%" . request("search") . "%");
+        }
+    }
 
     public function author(): BelongsTo
     {

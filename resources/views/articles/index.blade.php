@@ -4,7 +4,7 @@
     @include("partials._header")
 
     <div class="col-lg-8">
-
+        @unless (count($articles) < 1)
         <!-- Featured blog post here-->
         <x-featured-article-card :article="$articles[0]"/>
 
@@ -22,6 +22,7 @@
                 @endforeach
             </div>
         </div>
+        @endunless
 
         <!-- Pagination-->
         {{ $articles->appends($_GET)->links() }}
