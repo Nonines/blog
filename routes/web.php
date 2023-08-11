@@ -37,6 +37,9 @@ Route::prefix("/categories")->group(function () {
     });
 });
 
-Route::resource("comments", CommentController::class)->only([
-    "store"
-]);
+Route::prefix("/comments")->group(function () {
+    Route::controller(CommentController::class)->group(function () {
+        Route::post("/", "store")->name("comments.store");
+        Route::get("/reply/{comment}", "reply")->name("comments.reply");
+    });
+});

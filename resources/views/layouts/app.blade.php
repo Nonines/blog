@@ -6,6 +6,9 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
 
+        <script src="https://use.fontawesome.com/fb907e8d54.js"></script>
+
+
         <title>Blog Home - Start Bootstrap Template</title>
 
         <!-- Favicon-->
