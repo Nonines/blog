@@ -2,19 +2,19 @@
 
 @section('content')
 
+<!-- Post header-->
+<header class="mb-4 pt-5">
+    <!-- Post title-->
+    <h1 class="fw-bolder mb-1">{{$article->title}}</h1>
+    <!-- Post meta content-->
+    <div class="text-muted fst-italic mb-2">Posted on {{$article->created_at}} by {{$article->author->name}}</div>
+    <!-- Post categories-->
+    <a class="badge bg-secondary text-decoration-none link-light" href="/categories/{{$article->category->id}}">{{$article->category->title}}</a>
+    {{-- <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a> --}}
+</header>
 <div class="col-lg-8">
     <!-- Post content-->
     <article>
-        <!-- Post header-->
-        <header class="mb-4 pt-5">
-            <!-- Post title-->
-            <h1 class="fw-bolder mb-1">{{$article->title}}</h1>
-            <!-- Post meta content-->
-            <div class="text-muted fst-italic mb-2">Posted on {{$article->created_at}} by {{$article->author->name}}</div>
-            <!-- Post categories-->
-            <a class="badge bg-secondary text-decoration-none link-light" href="/categories/{{$article->category->id}}">{{$article->category->title}}</a>
-            {{-- <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a> --}}
-        </header>
         <!-- Preview image figure-->
         <figure class="mb-4"><img class="img-fluid rounded" src="{{$article->image ? asset("/storage/" . $article->image) : asset("storage/images/default_article_image.png")}}" alt="..." /></figure>
         <!-- Post content-->
@@ -28,8 +28,25 @@
         <div class="card bg-light">
             <div class="card-body">
                 <!-- Comment form-->
-                <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
-                <!-- Comment with nested comments-->
+                <form method="POST" action="/comments" class="mb-4">
+                    @csrf
+                    <input type="hidden" name="article_id" value="{{$article->id}}">
+
+                    <textarea name="content" class="form-control mb-2" rows="3" placeholder="Join the discussion and leave a comment!" required>{{old("content")}}</textarea>
+                    @error("content")
+                    <p class="mt-1 text-warning">{{$message}}</p>
+                    @enderror
+
+                    <input type="text" name="name" class="form-control mb-2" rows="3" placeholder="Your name" required value="{{old("name")}}">
+                    @error("name")
+                    <p class="mt-1 text-warning">{{$message}}</p>
+                    @enderror
+
+                    <button class="btn btn-primary" id="button-comment" type="submit">Comment</button>
+                </form>
+
+                <x-comment :comments="$article->comments" />
+                {{-- <!-- Comment with nested comments-->
                 <div class="d-flex mb-4">
                     <!-- Parent comment-->
                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
@@ -53,15 +70,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Single comment-->
-                <div class="d-flex">
-                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                    <div class="ms-3">
-                        <div class="fw-bold">Commenter Name</div>
-                        When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                    </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>

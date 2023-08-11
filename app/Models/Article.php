@@ -31,13 +31,13 @@ class Article extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class)->whereNull("parent_id");
+    }
+
     // public function tags(): BelongsToMany
     // {
     //     return $this->belongsToMany(Tag::class);
-    // }
-
-    // public function comments(): HasMany
-    // {
-    //     return $this->hasMany(Comment::class)->whereNull("parent_id");
     // }
 }

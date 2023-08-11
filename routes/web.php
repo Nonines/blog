@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,7 @@ Route::prefix("/categories")->group(function () {
         Route::get("{category}", "show")->name("categories.show");
     });
 });
+
+Route::resource("comments", CommentController::class)->only([
+    "store"
+]);
