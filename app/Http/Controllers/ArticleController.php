@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        $articles = Article::latest()->paginate(6);
+        return view("articles.index", compact("articles"));
     }
 
     /**
@@ -34,9 +36,9 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Article $article)
+    public function show(Article $article): View
     {
-        //
+        return view("articles.show", compact("article"));
     }
 
     /**
