@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
-use App\Models\Article;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +26,12 @@ Route::prefix("/articles")->group(function () {
     Route::controller(ArticleController::class)->group(function () {
         Route::get("/", "index")->name("articles.index");
         Route::get("{article}", "show")->name("articles.show");
+    });
+});
+
+Route::prefix("/categories")->group(function () {
+    Route::controller(CategoryController::class)->group(function () {
+        // Route::get("/", "index")->name("categories.index");
+        Route::get("{category}", "show")->name("categories.show");
     });
 });
