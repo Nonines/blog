@@ -26,7 +26,6 @@ class ArticleController extends Controller
 
     public function show(Article $article): View
     {
-        // TODO add comments: $comments = $article->comments;
         return view("articles.show", compact("article"));
     }
 

@@ -18,11 +18,19 @@
         <!-- Preview image figure-->
         <figure class="mb-4"><img class="img-fluid rounded" src="{{$article->image ? asset("/storage/" . $article->image) : asset("storage/images/default_article_image.png")}}" alt="..." /></figure>
         <!-- Post content-->
-        <section class="mb-5">
+        <section class="mb-1">
             <h2 class="fw-bolder mb-4 mt-5">{{$article->excerpt}}</h2>
             <p class="fs-5 mb-4">{{$article->content}}</p>
         </section>
+        <!-- Tags -->
+        <section class="mb-4">
+            Tags:
+            @foreach ($article->tags as $tag)
+            <span class="badge text-bg-secondary me-1"><a href="/tags/{{$tag->id}}" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{$tag->title}}</a></span>
+            @endforeach
+        </section>
     </article>
+
     <!-- Comments section-->
     <section class="mb-5">
         <div class="card bg-light">
@@ -46,31 +54,6 @@
                 </form>
 
                 <x-comment :comments="$article->comments" />
-                {{-- <!-- Comment with nested comments-->
-                <div class="d-flex mb-4">
-                    <!-- Parent comment-->
-                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                    <div class="ms-3">
-                        <div class="fw-bold">Commenter Name</div>
-                        If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                        <!-- Child comment 1-->
-                        <div class="d-flex mt-4">
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                            </div>
-                        </div>
-                        <!-- Child comment 2-->
-                        <div class="d-flex mt-4">
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                When you put money directly to a problem, it makes a good headline.
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </section>

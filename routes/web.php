@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +42,12 @@ Route::prefix("/comments")->group(function () {
     Route::controller(CommentController::class)->group(function () {
         Route::post("/", "store")->name("comments.store");
         Route::get("/reply/{comment}", "reply")->name("comments.reply");
+    });
+});
+
+Route::prefix("/tags")->group(function () {
+    Route::controller(TagController::class)->group(function () {
+        Route::get("/", "index");
+        Route::get("{tag}", "show");
     });
 });
