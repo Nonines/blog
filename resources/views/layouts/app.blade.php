@@ -16,7 +16,7 @@
 
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
-    <body>
+    <body class="d-flex flex-column min-vh-100">
         @include("partials._navbar")
 
         <!-- Page content-->
@@ -62,8 +62,12 @@
                     </div>
                     <!-- Side widget-->
                     <div class="card mb-4">
-                        <div class="card-header">Side Widget</div>
-                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                        <div class="card-header">Latest tags</div>
+                        <div class="card-body">
+                            @foreach ($latest_tags as $tag)
+                            <span class="badge text-bg-secondary me-1"><a href="/tags/{{$tag->id}}" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{$tag->title}}</a></span>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
