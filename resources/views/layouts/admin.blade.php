@@ -10,6 +10,13 @@
         <meta name="author" content="" />
         <title>Blog Admin</title>
 
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+        <!-- Select2 -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
         @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/admin.css'])
     </head>
     <body>
@@ -150,6 +157,13 @@
                         );
                     });
                 }
+            });
+        </script>
+
+        <!-- Select2 -->
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-multiple').select2();
             });
         </script>
     </body>

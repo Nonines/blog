@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Article\StoreRequest;
+use App\Models\Tag;
 
 class ArticleController extends Controller
 {
@@ -19,7 +20,8 @@ class ArticleController extends Controller
 
     public function create(): View
     {
-        return view("articles.create");
+        $tags = Tag::all();
+        return view("articles.create", compact("tags"));
     }
 
     public function store(StoreRequest $request)
@@ -29,6 +31,7 @@ class ArticleController extends Controller
             $validated["image"] = Storage::putFile("post-images", $image);
         }
         $article = Auth::user()->articles()->create($validated);
+        $article->tags()->sync($validated["tags"]);
 
         return redirect()->route("articles.show", compact("article"));
     }

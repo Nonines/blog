@@ -18,7 +18,7 @@ class StoreRequest extends FormRequest
             "excerpt" => ["required", "min:10"],
             "content" => ["required", "min:50"],
             "category_id" => ["required", "exists:App\Models\Category,id"],
-            // "tags" => ["required"],
+            "tags" => ["required", "exists:App\Models\Tag,id"],
             "caption" => ["min:10"],
             "image" => ["sometimes", "image"]
         ];

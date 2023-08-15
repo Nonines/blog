@@ -51,6 +51,19 @@
     </div>
 
     <div class="mb-3">
+        <label for="tags" class="form-label">Tags</label>
+        <select class="js-example-basic-multiple form-select" id="tags" name="tags[]" multiple="multiple">
+            @foreach ($tags as $tag)
+            <option value="{{$tag->id}}">{{$tag->title}}</option>
+            @endforeach
+        </select>
+
+        @error("tags")
+        <p class="text-danger">{{$message}}</p>
+        @enderror
+    </div>
+
+    <div class="mb-3">
         <label for="formFile" class="form-label">Featured image</label>
         <input class="form-control" type="file" id="formFile" name="image">
 
