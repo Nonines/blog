@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
@@ -22,10 +23,22 @@ Route::redirect("/", "/articles");
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix("/admin")->group(function () {
+    Route::controller(AdminController::class)->group(function () {
+        Route::middleware("auth")->group(function () {
+            Route::get("/", "index");
+            Route::get("/articles", "articles");
+        });
+    });
+});
 
 Route::prefix("/articles")->group(function () {
     Route::controller(ArticleController::class)->group(function () {
+        Route::middleware("auth")->group(function () {
+            Route::get("/create", "create");
+            Route::post("/store", "store");
+        });
+
         Route::get("/", "index")->name("articles.index");
         Route::get("{article}", "show")->name("articles.show");
     });
