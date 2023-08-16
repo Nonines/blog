@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("caption")->nullable();
             $table->longText("content");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -3,9 +3,13 @@
 
 <div>
     <h1>Articles</h1>
-    <div class="d-grid gap-2 my-5">
+    <div class="d-grid gap-2 d-md-block my-5">
         <a href="/articles/create" class="btn btn-primary" role="button"
             >New article</a
+        >
+        <a href="/admin/articles/trash" class="btn btn-outline-danger" role="button"
+            ><i class="fa fa-trash-o" aria-hidden="true"></i>
+            Trash</a
         >
     </div>
 
@@ -31,7 +35,6 @@
 
                             <form id="delete-form-{{$article->id}}" action="/articles/{{$article->id}}" method="post">
                                 @csrf
-                                @method("DELETE")
                             </form>
                         </div>
                     </td>

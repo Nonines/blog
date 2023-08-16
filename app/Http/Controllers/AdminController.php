@@ -20,4 +20,12 @@ class AdminController extends Controller
         $user_articles = Article::whereBelongsTo($user, "author")->paginate(10);
         return View("admin.articles", compact("user_articles"));
     }
+
+    public function articlesTrash(): View
+    {
+        $user = Auth::user();
+        $trashed_articles = Article::onlyTrashed()->whereBelongsTo($user, "author")->paginate(10);
+
+        return View("admin.articles_trash", compact("trashed_articles"));
+    }
 }

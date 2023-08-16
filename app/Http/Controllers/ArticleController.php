@@ -57,7 +57,7 @@ class ArticleController extends Controller
         return view("articles.edit", compact("article", "tags", "article_tags_ids"));
     }
 
-    public function update(UpdateRequest $request, Article $article)
+    public function update(UpdateRequest $request, Article $article): RedirectResponse
     {
         $validated = $request->validated();
         if ($image = $request->file("image")) {
@@ -72,13 +72,24 @@ class ArticleController extends Controller
         return redirect()->back()->with("message", "Updated successfully!");
     }
 
-    public function destroy(DestroyRequest $request, Article $article)
+    public function delete(DestroyRequest $request, Article $article): RedirectResponse
+    {
+        $article->delete();
+        return redirect()->back()->with("message", "Trashed successfully!");
+    }
+
+    public function restore(DestroyRequest $request, Article $article): RedirectResponse
+    {
+        $article->restore();
+        return redirect()->back()->with("message", "Article restored!");
+    }
+
+    public function destroy(DestroyRequest $request, Article $article): RedirectResponse
     {
         if ($article->image && Storage::exists($article->image)) {
             Storage::delete($article->image);
         }
-        $article->delete();
-
+        $article->forceDelete();
         return redirect()->back()->with("message", "Deleted successfully!");
     }
 }

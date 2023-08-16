@@ -28,6 +28,7 @@ Route::prefix("/admin")->group(function () {
         Route::middleware("auth")->group(function () {
             Route::get("/", "index");
             Route::get("/articles", "articles");
+            Route::get("/articles/trash", "articlesTrash");
         });
     });
 });
@@ -39,7 +40,9 @@ Route::prefix("/articles")->group(function () {
             Route::post("/store", "store");
             Route::get("/{article}/edit", "edit");
             Route::put("/{article}", "update");
-            Route::delete("/{article}", "destroy");
+            Route::post("/{article}", "delete");
+            Route::post("/{article}/restore", "restore")->withTrashed();
+            Route::delete("/{article}", "destroy")->withTrashed();
         });
 
         Route::get("/", "index")->name("articles.index");
