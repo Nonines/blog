@@ -30,6 +30,7 @@ Route::prefix("/admin")->group(function () {
             Route::get("/articles", "articles");
             Route::get("/articles/trash", "articlesTrash");
             Route::get("/categories", "categories")->name("admin.categories");
+            Route::get("/tags", "tags")->name("admin.tags");
         });
     });
 });
@@ -71,6 +72,10 @@ Route::prefix("/comments")->group(function () {
 
 Route::prefix("/tags")->group(function () {
     Route::controller(TagController::class)->group(function () {
+        Route::middleware("auth")->group(function () {
+            Route::post("/store", "store");
+            Route::delete("/{tag}", "destroy");
+        });
         Route::get("/", "index");
         Route::get("{tag}", "show");
     });

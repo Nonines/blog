@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Tag\StoreRequest;
 
 class TagController extends Controller
 {
@@ -14,14 +15,11 @@ class TagController extends Controller
         return view("tags.index", compact("tags"));
     }
 
-    public function create()
+    public function store(StoreRequest $request): RedirectResponse
     {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
+        $validated = $request->validated();
+        Tag::create($validated);
+        return redirect()->route("admin.tags")->with("message", "Success");
     }
 
     public function show(Tag $tag): View
@@ -30,18 +28,9 @@ class TagController extends Controller
         return view("tags.show", compact("tag", "tag_articles"));
     }
 
-    public function edit(Tag $tag)
+    public function destroy(Tag $tag): RedirectResponse
     {
-        //
-    }
-
-    public function update(Request $request, Tag $tag)
-    {
-        //
-    }
-
-    public function destroy(Tag $tag)
-    {
-        //
+        $tag->delete();
+        return redirect()->route("admin.tags")->with("message", "Deleted");
     }
 }
