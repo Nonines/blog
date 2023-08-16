@@ -25,7 +25,7 @@
                 @foreach ($trashed_articles as $article)
                 <tr>
                     <td>{{$article->title}}</td>
-                    <td>{{$article->category->title}}</td>
+                    <td>{{$article->category ? $article->category->title : ""}}</td>
                     <td>{{$article->deleted_at}}</td>
                     <td>
                         <div>

@@ -37,28 +37,18 @@
                     >
                     <a
                         class="list-group-item list-group-item-action list-group-item-light p-3"
-                        href="#!"
-                        >Shortcuts</a
+                        href="/admin/categories"
+                        >Categories</a
                     >
                     <a
                         class="list-group-item list-group-item-action list-group-item-light p-3"
                         href="#!"
-                        >Overview</a
-                    >
-                    <a
-                        class="list-group-item list-group-item-action list-group-item-light p-3"
-                        href="#!"
-                        >Events</a
+                        >Tags</a
                     >
                     <a
                         class="list-group-item list-group-item-action list-group-item-light p-3"
                         href="#!"
                         >Profile</a
-                    >
-                    <a
-                        class="list-group-item list-group-item-action list-group-item-light p-3"
-                        href="#!"
-                        >Status</a
                     >
                 </div>
             </div>
@@ -109,18 +99,18 @@
                                         class="dropdown-menu dropdown-menu-end"
                                         aria-labelledby="navbarDropdown"
                                     >
+                                        <a class="dropdown-item" href="/articles/create"
+                                            >Create new article</a
+                                        >
+                                        <a class="dropdown-item" href="#!"
+                                            >Something else here</a
+                                        >
+                                        <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                         </a>
-                                        <a class="dropdown-item" href="#!"
-                                            >Another action</a
-                                        >
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#!"
-                                            >Something else here</a
-                                        >
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf

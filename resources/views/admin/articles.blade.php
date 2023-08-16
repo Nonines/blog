@@ -26,7 +26,7 @@
                 @foreach ($user_articles as $article)
                 <tr>
                     <td><a href="/articles/{{$article->id}}">{{$article->title}}</a></td>
-                    <td>{{$article->category->title}}</td>
+                    <td>{{$article->category ? $article->category->title : ""}}</td>
                     <td>{{$article->created_at}}</td>
                     <td>
                         <div>

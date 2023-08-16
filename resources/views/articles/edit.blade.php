@@ -42,7 +42,7 @@
             <option>Select a category</option>
 
             @foreach ($all_categories as $category)
-            <option {{$article->category->id === $category->id ? "selected" : ""}} value="{{$category->id}}">{{$category->title}}</option>
+            <option {{$article->category && $article->category->id === $category->id ? "selected" : ""}} value="{{$category->id}}">{{$category->title}}</option>
             @endforeach
         </select>
 

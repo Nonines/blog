@@ -29,6 +29,7 @@ Route::prefix("/admin")->group(function () {
             Route::get("/", "index");
             Route::get("/articles", "articles");
             Route::get("/articles/trash", "articlesTrash");
+            Route::get("/categories", "categories")->name("admin.categories");
         });
     });
 });
@@ -52,6 +53,11 @@ Route::prefix("/articles")->group(function () {
 
 Route::prefix("/categories")->group(function () {
     Route::controller(CategoryController::class)->group(function () {
+        Route::middleware("auth")->group(function () {
+            Route::get("/create", "create");
+            Route::post("/store", "store");
+            Route::delete("/{category}", "destroy");
+        });
         Route::get("{category}", "show")->name("categories.show");
     });
 });

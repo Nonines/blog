@@ -9,7 +9,7 @@
     <!-- Post meta content-->
     <div class="text-muted fst-italic mb-2">Posted on {{$article->created_at}} by {{$article->author->name}}</div>
     <!-- Post categories-->
-    <a class="badge bg-secondary text-decoration-none link-light" href="/categories/{{$article->category->id}}">{{$article->category->title}}</a>
+    <a class="badge bg-secondary text-decoration-none link-light" href="/categories/{{$article->category ? $article->category->id : ""}}">{{$article->category ? $article->category->title : ""}}</a>
     {{-- <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a> --}}
 </header>
 <div class="col-lg-8">
