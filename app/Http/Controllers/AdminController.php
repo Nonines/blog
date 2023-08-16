@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
 
 class AdminController extends Controller
 {
@@ -15,7 +16,8 @@ class AdminController extends Controller
 
     public function articles(): View
     {
-        $user_articles = Auth::user()->articles;
+        $user = Auth::user();
+        $user_articles = Article::whereBelongsTo($user, "author")->paginate(10);
         return View("admin.articles", compact("user_articles"));
     }
 }

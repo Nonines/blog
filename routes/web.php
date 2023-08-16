@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +37,9 @@ Route::prefix("/articles")->group(function () {
         Route::middleware("auth")->group(function () {
             Route::get("/create", "create");
             Route::post("/store", "store");
+            Route::get("/{article}/edit", "edit");
+            Route::put("/{article}", "update");
+            Route::delete("/{article}", "destroy");
         });
 
         Route::get("/", "index")->name("articles.index");
@@ -46,7 +49,6 @@ Route::prefix("/articles")->group(function () {
 
 Route::prefix("/categories")->group(function () {
     Route::controller(CategoryController::class)->group(function () {
-        // Route::get("/", "index")->name("categories.index");
         Route::get("{category}", "show")->name("categories.show");
     });
 });

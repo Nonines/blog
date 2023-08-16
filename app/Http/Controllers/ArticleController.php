@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Article;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Article\EditRequest;
 use App\Http\Requests\Article\StoreRequest;
-use App\Models\Tag;
+use App\Http\Requests\Article\UpdateRequest;
+use App\Http\Requests\Article\DestroyRequest;
 
 class ArticleController extends Controller
 {
@@ -24,7 +28,7 @@ class ArticleController extends Controller
         return view("articles.create", compact("tags"));
     }
 
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
         if ($image = $request->file("image")) {
@@ -41,18 +45,40 @@ class ArticleController extends Controller
         return view("articles.show", compact("article"));
     }
 
-    public function edit(Article $article)
+    public function edit(EditRequest $request, Article $article): View
     {
-        //
+        $tags = Tag::all();
+
+        $article_tags_ids = [];
+        foreach ($article->tags as $tag) {
+            $article_tags_ids[] = $tag->id;
+        }
+
+        return view("articles.edit", compact("article", "tags", "article_tags_ids"));
     }
 
-    public function update(Request $request, Article $article)
+    public function update(UpdateRequest $request, Article $article)
     {
-        //
+        $validated = $request->validated();
+        if ($image = $request->file("image")) {
+            if ($article->image && Storage::exists($article->image)) {
+                Storage::delete($article->image);
+            }
+            $validated["image"] = Storage::putFile("post-images", $image);
+        }
+        $article->update($validated);
+        $article->tags()->sync($validated["tags"]);
+
+        return redirect()->back()->with("message", "Updated successfully!");
     }
 
-    public function destroy(Article $article)
+    public function destroy(DestroyRequest $request, Article $article)
     {
-        //
+        if ($article->image && Storage::exists($article->image)) {
+            Storage::delete($article->image);
+        }
+        $article->delete();
+
+        return redirect()->back()->with("message", "Deleted successfully!");
     }
 }
