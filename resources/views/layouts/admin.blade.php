@@ -121,6 +121,7 @@
                         </div>
                     </div>
                 </nav>
+                <x-alert />
                 <!-- Page content-->
                 <div class="container-fluid">
                     @yield('content')

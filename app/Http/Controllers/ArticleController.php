@@ -36,7 +36,7 @@ class ArticleController extends Controller
         $article = Auth::user()->articles()->create($validated);
         $article->tags()->sync($validated["tags"]);
 
-        return redirect()->route("articles.show", compact("article"));
+        return redirect()->route("articles.show", compact("article"))->with("message", "Article published!");
     }
 
     public function show(Article $article): View

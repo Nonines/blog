@@ -18,6 +18,7 @@
     </head>
     <body class="d-flex flex-column min-vh-100">
         @include("partials._navbar")
+        <x-alert />
 
         <!-- Page content-->
         <div class="container">
