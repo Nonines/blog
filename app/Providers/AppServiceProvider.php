@@ -24,7 +24,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
-        View::share("all_categories", Category::all());
-        View::share("latest_tags", Tag::latest()->limit(5)->get());
     }
 }

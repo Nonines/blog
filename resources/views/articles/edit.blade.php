@@ -41,7 +41,7 @@
         <select class="form-select" aria-label="" id="category" name="category_id">
             <option>Select a category</option>
 
-            @foreach ($all_categories as $category)
+            @foreach (\App\Helpers\QueryHelper::all_categories() as $category)
             <option {{$article->category && $article->category->id === $category->id ? "selected" : ""}} value="{{$category->id}}">{{$category->title}}</option>
             @endforeach
         </select>

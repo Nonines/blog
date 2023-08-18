@@ -19,7 +19,7 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::redirect("/", "/articles");
+Route::redirect("/", "/articles"); // why? why can't you have everything on the index? articles really necessary?
 
 Auth::routes();
 
