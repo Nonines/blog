@@ -4,7 +4,7 @@
     <div>
         <h1>All Categories</h1>
         <div class="d-grid gap-2 d-md-block my-5">
-            <a href="/categories/create" class="btn btn-primary" role="button"
+            <a href="{{route("categories.create")}}" class="btn btn-primary" role="button"
             >New category</a
             >
         </div>
@@ -23,7 +23,7 @@
                 <tbody>
                 @foreach (\App\Helpers\QueryHelper::all_categories() as $category)
                     <tr>
-                        <td><a href="/categories/{{$category->id}}">{{$category->title}}</a></td>
+                        <td><a href="{{route("categories.show", $category)}}">{{$category->title}}</a></td>
                         <td>{{$category->details}}</td>
                         <td>{{count($category->articles)}}</td>
                         <td>{{$category->created_at}}</td>
@@ -33,7 +33,7 @@
                                         class="btn btn-outline-danger">Delete
                                 </button>
 
-                                <form id="delete-form-{{$category->id}}" action="/categories/{{$category->id}}"
+                                <form id="delete-form-{{$category->id}}" action="{{route("categories.destroy", $category)}}"
                                       method="post">
                                     @csrf
                                     @method("DELETE")

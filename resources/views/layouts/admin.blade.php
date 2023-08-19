@@ -32,17 +32,17 @@
                 <div class="list-group list-group-flush">
                     <a
                         class="list-group-item list-group-item-action list-group-item-light p-3"
-                        href="/admin/articles"
+                        href="{{route("admin.articles")}}"
                         >Articles</a
                     >
                     <a
                         class="list-group-item list-group-item-action list-group-item-light p-3"
-                        href="/admin/categories"
+                        href="{{route("admin.categories")}}"
                         >Categories</a
                     >
                     <a
                         class="list-group-item list-group-item-action list-group-item-light p-3"
-                        href="/admin/tags"
+                        href="{{route("admin.tags")}}"
                         >Tags</a
                     >
                     <a
@@ -79,10 +79,10 @@
                         >
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="/admin">Home</a>
+                                    <a class="nav-link" href="{{route("admin.index")}}">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/">View blog</a>
+                                    <a class="nav-link" href="{{route("articles.index")}}">View blog</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a
@@ -99,7 +99,7 @@
                                         class="dropdown-menu dropdown-menu-end"
                                         aria-labelledby="navbarDropdown"
                                     >
-                                        <a class="dropdown-item" href="/articles/create"
+                                        <a class="dropdown-item" href="{{route("articles.create")}}"
                                             >Create new article</a
                                         >
                                         <a class="dropdown-item" href="#!"

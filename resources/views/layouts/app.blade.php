@@ -28,7 +28,7 @@
         <!-- Side widgets-->
         <div class="col-lg-4">
             <!-- Search widget-->
-            <form action="/articles">
+            <form action="{{route("articles.index")}}">
                 <div class="card mb-4">
                     <div class="card-header">Search</div>
                     <div class="card-body">
@@ -49,14 +49,14 @@
                         <div class="col-sm-6">
                             <ul class="list-unstyled mb-0">
                                 @foreach (\App\Helpers\QueryHelper::all_categories()->nth(2) as $category)
-                                    <li><a href="/categories/{{$category->id}}">{{$category->title}}</a></li>
+                                    <li><a href="{{route("categories.show", $category)}}">{{$category->title}}</a></li>
                                 @endforeach
                             </ul>
                         </div>
                         <div class="col-sm-6">
                             <ul class="list-unstyled mb-0">
                                 @foreach (\App\Helpers\QueryHelper::all_categories()->nth(2, 1) as $category)
-                                    <li><a href="/categories/{{$category->id}}">{{$category->title}}</a></li>
+                                    <li><a href="{{route("categories.show", $category)}}">{{$category->title}}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -68,7 +68,7 @@
                 <div class="card-header">Latest tags</div>
                 <div class="card-body">
                     @foreach (\App\Helpers\QueryHelper::latest_tags() as $tag)
-                        <span class="badge text-bg-secondary me-1"><a href="/tags/{{$tag->id}}"
+                        <span class="badge text-bg-secondary me-1"><a href="{{route("tags.show", $tag)}}"
                                                                       class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{$tag->title}}</a></span>
                     @endforeach
                 </div>

@@ -8,7 +8,7 @@
         {{$comment->content}}
     </div>
     <div class="flex-shrink-0">
-        <a href="/comments/reply/{{$comment->id}}"><i class="fa fa-commenting" aria-hidden="true"></i>Reply</a>
+        <a href="{{route("comments.reply", $comment)}}"><i class="fa fa-commenting" aria-hidden="true"></i>Reply</a>
     </div>
 </div>
 

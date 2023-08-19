@@ -9,8 +9,7 @@
     <!-- Post meta content-->
     <div class="text-muted fst-italic mb-2">Posted on {{$article->created_at}} by {{$article->author->name}}</div>
     <!-- Post categories-->
-    <a class="badge bg-secondary text-decoration-none link-light" href="/categories/{{$article->category ? $article->category->id : ""}}">{{$article->category ? $article->category->title : ""}}</a>
-    {{-- <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a> --}}
+    <a class="badge bg-secondary text-decoration-none link-light" href="{{$article->category ? route("categories.show", $article->category) : ""}}">{{$article->category ? $article->category->title : ""}}</a>
 </header>
 <div class="col-lg-8">
     <!-- Post content-->
@@ -26,7 +25,7 @@
         <section class="mb-4">
             Tags:
             @foreach ($article->tags as $tag)
-            <span class="badge text-bg-secondary me-1"><a href="/tags/{{$tag->id}}" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{$tag->title}}</a></span>
+            <span class="badge text-bg-secondary me-1"><a href="{{route("tags.show", $tag)}}" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{$tag->title}}</a></span>
             @endforeach
         </section>
     </article>
@@ -36,7 +35,7 @@
         <div class="card bg-light">
             <div class="card-body">
                 <!-- Comment form-->
-                <form method="POST" action="/comments" class="mb-4">
+                <form method="POST" action="{{route("comments.store")}}" class="mb-4">
                     @csrf
                     <input type="hidden" name="article_id" value="{{$article->id}}">
 

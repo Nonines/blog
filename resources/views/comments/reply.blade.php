@@ -9,7 +9,7 @@
     </div>
 </div>
 <div class="col-lg-8 mb-5">
-    <form method="POST" action="/comments" class="mb-5">
+    <form method="POST" action="{{route("comments.store")}}" class="mb-5">
         @csrf
         <input type="hidden" name="article_id" value="{{$article_id}}">
         <input type="hidden" name="parent_id" value="{{$comment->id}}">
@@ -25,7 +25,7 @@
         @enderror
 
         <button class="btn btn-primary" type="submit">Reply</button>
-        <a class="btn btn-secondary" href="/articles/{{$article_id}}">Back</a>
+        <a class="btn btn-secondary" href="{{route("articles.show", $article_id)}}">Back</a>
     </form>
 </div>
 @endsection

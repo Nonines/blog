@@ -5,7 +5,7 @@
     <h1>Edit Article</h1>
 </div>
 
-<form action="/articles/{{$article->id}}" method="POST" enctype="multipart/form-data">
+<form action="{{route("articles.update", $article)}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method("PUT")
 

@@ -5,7 +5,7 @@
     <h1>Create New Article</h1>
 </div>
 
-<form action="/articles/store" method="POST" enctype="multipart/form-data">
+<form action="{{route("articles.store")}}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <div class="mb-3">
