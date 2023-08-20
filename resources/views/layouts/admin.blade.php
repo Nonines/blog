@@ -10,9 +10,6 @@
         <meta name="author" content="" />
         <title>Blog Admin</title>
 
-        <!-- Font Awesome -->
-        <script src="https://use.fontawesome.com/fb907e8d54.js"></script>
-
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 
@@ -160,5 +157,8 @@
                 $('.js-example-basic-multiple').select2();
             });
         </script>
+
+        <!-- Font Awesome -->
+        <script src="https://use.fontawesome.com/fb907e8d54.js"></script>
     </body>
 </html>

@@ -7,7 +7,7 @@
         <a href="{{route("articles.create")}}" class="btn btn-primary" role="button"
             >New article</a
         >
-        <a href="{{route("admin.articles")}}" class="btn btn-outline-primary" role="button"
+        <a href="{{route("admin.articles")}}" class="btn btn-outline-secondary" role="button"
             >Published Articles</a
         >
     </div>
@@ -29,7 +29,7 @@
                     <td>{{$article->deleted_at}}</td>
                     <td>
                         <div>
-                            <button type="submit" form="restore-form-{{$article->id}}" class="btn btn-outline-primary">Restore</button>
+                            <button type="submit" form="restore-form-{{$article->id}}" class="btn btn-outline-secondary">Restore</button>
 
                             <button type="submit" form="destroy-form-{{$article->id}}" class="btn btn-outline-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Permanently delete</button>
 

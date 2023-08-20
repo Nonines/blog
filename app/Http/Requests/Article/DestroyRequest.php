@@ -10,7 +10,7 @@ class DestroyRequest extends FormRequest
 
     public function authorize(): bool
     {
-        return $this->route("article")->author->id === Auth::id(); // use gates
+        return true;
     }
 
     public function rules(): array

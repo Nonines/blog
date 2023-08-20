@@ -6,10 +6,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <script src="https://use.fontawesome.com/fb907e8d54.js"></script>
-
-
-    <title>Blog Home - Start Bootstrap Template</title>
+    <title>Blog</title>
 
     <!-- Favicon-->
     {{-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> --}}
@@ -78,5 +75,8 @@
 </div>
 
 @include("partials._footer")
+
+<!-- Font Awesome -->
+<script src="https://use.fontawesome.com/fb907e8d54.js"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@ class UpdateRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->route("article")->author->id === Auth::id(); // in reality this shouldn't happen anyway, but instead of going this, use gates instead
+        return true;
     }
 
     public function rules(): array
@@ -21,7 +21,7 @@ class UpdateRequest extends FormRequest
             "category_id" => ["required", "exists:categories,id"],
             "tags" => ["required", "exists:tags,id"],
             "caption" => ["min:10"],
-            "image" => ["sometimes", "image"]
+            "image" => ["image"]
         ];
     }
 }

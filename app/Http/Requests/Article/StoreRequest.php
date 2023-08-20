@@ -20,7 +20,7 @@ class StoreRequest extends FormRequest
             "category_id" => ["required", "exists:categories,id"],
             "tags" => ["required", "exists:tags,id"],
             "caption" => ["min:10"],
-            "image" => ["sometimes", "image"] // lol what do you mean by sometimes??
+            "image" => ["image"]
         ];
     }
 }
