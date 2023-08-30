@@ -5,7 +5,7 @@
     <h1>Create New Category</h1>
 </div>
 
-<form action="/categories/store" method="POST">
+<form action="{{route("categories.store")}}" method="POST">
     @csrf
 
     <div class="mb-3">

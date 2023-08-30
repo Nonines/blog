@@ -5,7 +5,7 @@
     <h1>Edit Article</h1>
 </div>
 
-<form action="/articles/{{$article->id}}" method="POST" enctype="multipart/form-data">
+<form action="{{route("articles.update", $article)}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method("PUT")
 
@@ -41,7 +41,7 @@
         <select class="form-select" aria-label="" id="category" name="category_id">
             <option>Select a category</option>
 
-            @foreach ($all_categories as $category)
+            @foreach (\App\Helpers\QueryHelper::all_categories() as $category)
             <option {{$article->category && $article->category->id === $category->id ? "selected" : ""}} value="{{$category->id}}">{{$category->title}}</option>
             @endforeach
         </select>

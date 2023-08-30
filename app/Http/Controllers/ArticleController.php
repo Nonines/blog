@@ -12,9 +12,15 @@ use App\Http\Requests\Article\EditRequest;
 use App\Http\Requests\Article\StoreRequest;
 use App\Http\Requests\Article\UpdateRequest;
 use App\Http\Requests\Article\DestroyRequest;
+use App\Http\Middleware\Article\CanModifyArticle;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(CanModifyArticle::class)->only("edit", "update", "delete", "restore", "destroy");
+    }
+
     public function index(): View
     {
         $articles = Article::latest()->filter(request(["search"]))->paginate(6);

@@ -24,8 +24,8 @@ class StoreRequest extends FormRequest
         return [
             "content" => ["required", "string"],
             "name" => ["required", "string"],
-            "article_id" => ["required", "exists:App\Models\Article,id"],
-            "parent_id" => ["sometimes", "exists:App\Models\Comment,id"],
+            "article_id" => ["required", "exists:articles,id"],
+            "parent_id" => ["sometimes", "exists:comments,id"],
         ];
     }
 }

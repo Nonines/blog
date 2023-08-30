@@ -19,64 +19,71 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::redirect("/", "/articles");
-
 Auth::routes();
 
-Route::prefix("/admin")->group(function () {
-    Route::controller(AdminController::class)->group(function () {
+Route::controller(AdminController::class)->group(function () {
+    Route::prefix("/admin")->group(function () {
         Route::middleware("auth")->group(function () {
-            Route::get("/", "index");
-            Route::get("/articles", "articles");
-            Route::get("/articles/trash", "articlesTrash");
+            Route::get("/", "index")->name("admin.index");
+            Route::get("/articles", "articles")->name("admin.articles");
+            Route::get("/articles/trash", "articlesTrash")->name("articles.trash");
             Route::get("/categories", "categories")->name("admin.categories");
             Route::get("/tags", "tags")->name("admin.tags");
         });
     });
 });
 
-Route::prefix("/articles")->group(function () {
-    Route::controller(ArticleController::class)->group(function () {
-        Route::middleware("auth")->group(function () {
-            Route::get("/create", "create");
-            Route::post("/store", "store");
-            Route::get("/{article}/edit", "edit");
-            Route::put("/{article}", "update");
-            Route::post("/{article}", "delete");
-            Route::post("/{article}/restore", "restore")->withTrashed();
-            Route::delete("/{article}", "destroy")->withTrashed();
-        });
+Route::controller(ArticleController::class)->group(function () {
+    Route::name("articles.")->group(function () {
+        Route::get("/", "index")->name("index");
 
-        Route::get("/", "index")->name("articles.index");
-        Route::get("{article}", "show")->name("articles.show");
+        Route::prefix("/articles")->group(function () {
+            Route::middleware("auth")->group(function () {
+                Route::get("/create", "create")->name("create");
+                Route::post("/store", "store")->name("store");
+                Route::get("/{article}/edit", "edit")->name("edit");
+                Route::put("/{article}", "update")->name("update");
+                Route::post("/{article}", "delete")->name("delete");
+                Route::post("/{article}/restore", "restore")->withTrashed()->name("restore");
+                Route::delete("/{article}", "destroy")->withTrashed()->name("destroy");
+            });
+
+            Route::get("{article}", "show")->name("show");
+        });
     });
 });
 
-Route::prefix("/categories")->group(function () {
-    Route::controller(CategoryController::class)->group(function () {
-        Route::middleware("auth")->group(function () {
-            Route::get("/create", "create");
-            Route::post("/store", "store");
-            Route::delete("/{category}", "destroy");
+Route::controller(CategoryController::class)->group(function () {
+    Route::name("categories.")->group(function () {
+        Route::prefix("/categories")->group(function () {
+            Route::middleware("auth")->group(function () {
+                Route::get("/create", "create")->name("create");
+                Route::post("/store", "store")->name("store");
+                Route::delete("/{category}", "destroy")->name("destroy");
+            });
+            Route::get("{category}", "show")->name("show");
         });
-        Route::get("{category}", "show")->name("categories.show");
     });
 });
 
-Route::prefix("/comments")->group(function () {
-    Route::controller(CommentController::class)->group(function () {
-        Route::post("/", "store")->name("comments.store");
-        Route::get("/reply/{comment}", "reply")->name("comments.reply");
+Route::controller(CommentController::class)->group(function () {
+    Route::name("comments.")->group(function () {
+        Route::prefix("/comments")->group(function () {
+            Route::post("/store", "store")->name("store");
+            Route::get("/reply/{comment}", "reply")->name("reply");
+        });
     });
 });
 
-Route::prefix("/tags")->group(function () {
-    Route::controller(TagController::class)->group(function () {
-        Route::middleware("auth")->group(function () {
-            Route::post("/store", "store");
-            Route::delete("/{tag}", "destroy");
+Route::controller(TagController::class)->group(function () {
+    Route::name("tags.")->group(function () {
+        Route::prefix("/tags")->group(function () {
+            Route::middleware("auth")->group(function () {
+                Route::post("/store", "store")->name("store");
+                Route::delete("/{tag}", "destroy")->name("destroy");
+            });
+            Route::get("/", "index")->name("index");
+            Route::get("{tag}", "show")->name("show");
         });
-        Route::get("/", "index");
-        Route::get("{tag}", "show");
     });
 });

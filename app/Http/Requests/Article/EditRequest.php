@@ -9,7 +9,7 @@ class EditRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->route("article")->author->id === Auth::id();
+        return true;
     }
 
     public function rules(): array

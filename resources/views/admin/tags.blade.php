@@ -4,7 +4,7 @@
 <div>
     <h1>All Tags</h1>
     <div class="d-grid gap-2 d-md-block my-5">
-        <form action="/tags/store" method="POST">
+        <form action="{{route("tags.store")}}" method="POST">
             @csrf
 
             <div class="mb-3">
@@ -32,14 +32,14 @@
             <tbody>
                 @foreach ($tags as $tag)
                 <tr>
-                    <td><a href="/tags/{{$tag->id}}">{{$tag->title}}</a></td>
+                    <td><a href="{{route("tags.show", $tag)}}">{{$tag->title}}</a></td>
                     <td>{{count($tag->articles)}}</td>
                     <td>{{$tag->created_at}}</td>
                     <td>
                         <div>
                             <button type="submit" form="delete-form-{{$tag->id}}" class="btn btn-outline-danger">Delete</button>
 
-                            <form id="delete-form-{{$tag->id}}" action="/tags/{{$tag->id}}" method="post">
+                            <form id="delete-form-{{$tag->id}}" action="{{route("tags.destroy", $tag)}}" method="post">
                                 @csrf
                                 @method("DELETE")
                             </form>

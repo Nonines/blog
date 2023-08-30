@@ -5,7 +5,7 @@
     <h1>Create New Article</h1>
 </div>
 
-<form action="/articles/store" method="POST" enctype="multipart/form-data">
+<form action="{{route("articles.store")}}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <div class="mb-3">
@@ -40,7 +40,7 @@
         <select class="form-select" aria-label="" id="category" name="category_id">
             <option selected>Select a category</option>
 
-            @foreach ($all_categories as $category)
+            @foreach (\App\Helpers\QueryHelper::all_categories() as $category)
             <option value="{{$category->id}}">{{$category->title}}</option>
             @endforeach
         </select>

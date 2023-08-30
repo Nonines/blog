@@ -14,7 +14,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => ["required", "max:24", "unique:App\Models\Category,title"],
+            "title" => ["required", "max:24", "unique:categories,title"],
             "details" => ["required", "min:10"],
         ];
     }

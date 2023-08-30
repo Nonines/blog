@@ -4,10 +4,10 @@
 <div>
     <h1>Trashed Articles</h1>
     <div class="d-grid gap-2 d-md-block my-5">
-        <a href="/articles/create" class="btn btn-primary" role="button"
+        <a href="{{route("articles.create")}}" class="btn btn-primary" role="button"
             >New article</a
         >
-        <a href="/admin/articles/" class="btn btn-outline-primary" role="button"
+        <a href="{{route("admin.articles")}}" class="btn btn-outline-secondary" role="button"
             >Published Articles</a
         >
     </div>
@@ -29,15 +29,15 @@
                     <td>{{$article->deleted_at}}</td>
                     <td>
                         <div>
-                            <button type="submit" form="restore-form-{{$article->id}}" class="btn btn-outline-primary">Restore</button>
+                            <button type="submit" form="restore-form-{{$article->id}}" class="btn btn-outline-secondary">Restore</button>
 
                             <button type="submit" form="destroy-form-{{$article->id}}" class="btn btn-outline-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Permanently delete</button>
 
-                            <form id="restore-form-{{$article->id}}" action="/articles/{{$article->id}}/restore" method="post">
+                            <form id="restore-form-{{$article->id}}" action="{{route("articles.restore", $article)}}" method="post">
                                 @csrf
                             </form>
 
-                            <form id="destroy-form-{{$article->id}}" action="/articles/{{$article->id}}" method="post">
+                            <form id="destroy-form-{{$article->id}}" action="{{route("articles.destroy", $article)}}" method="post">
                                 @csrf
                                 @method("DELETE")
                             </form>
