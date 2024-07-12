@@ -7,6 +7,6 @@ npm run build
 
 # Laravel specific commands
 echo "Running Laravel migrations and seeds..."
-php artisan migrate:fresh --seed
+php artisan migrate:fresh --force --seed
 
 # Additional commands
