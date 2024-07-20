@@ -18,4 +18,4 @@ echo "Caching views..."
 php artisan view:cache
 
 echo "Running migrations..."
-php artisan migrate:fresh --seed
+php artisan migrate:fresh --force --seed
