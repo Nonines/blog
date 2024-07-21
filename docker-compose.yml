@@ -8,7 +8,7 @@ services:
     environment:
       - DB_CONNECTION=pgsql
       - DB_HOST=vibrant_shirley
-      - DB_PORT=55003
+      - DB_PORT=5432
       - DB_DATABASE=blog_app
       - DB_USERNAME=postgres
       - DB_PASSWORD=postgres
