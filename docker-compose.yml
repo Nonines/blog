@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    image: blog
+    container_name: blog_container
+    networks:
+      - laravel_network
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=vibrant_shirley
+      - DB_PORT=55003
+      - DB_DATABASE=blog_app
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "9956:80"
+
+
+networks:
+  laravel_network:
+    external: true
+
+volumes:
+  postgres_data:
